@@ -1,0 +1,19 @@
+<div class="container container-width mt-5"> {{!-- contents are not affected by container-width --}}
+    <div class="row">
+        <div class="col-4">
+            <img src="{{tvshow.image}}" alt="">
+        </div>
+
+        <div class="col-8">
+            <h2>{{tvshow.name}}</h2>
+            <h5>Rating: {{tvshow.rating}}</h5>
+            <p>{{{tvshow.summary}}}</p>
+                
+            <a href="{{tvshow.official_site}}">Official Site</a>
+
+            <form method='GET' action="/">
+                <button class="btn btn-primary mt-3" type="submit">Back</button>
+            </form>
+        </div>
+    </div>
+</div>
