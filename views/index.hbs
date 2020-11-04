@@ -4,14 +4,18 @@
     <li class="list-group-item list-group-item-action"><a href="show/{{this.tvid}}">{{this.name}}</a></li>
     {{/each}}
 </ul>
-
-<form method="GET" action="/">
-    <input type="hidden" name="offset" value="prevOffset">
-    <button type="submit">Previous</button>
-</form>
-<p>Page: {{pageNum}} / {{pageTotal}}</p>
-<form method="GET" action="/">
-    <input type="hidden" name="offset" value="nextOffset">
-    <button type="submit">Next</button>
-</form>
+    <div class="row justify-content-center d-flex align-items-stretch mt-3">
+        <form method="GET" action="/">
+            <input type="hidden" name="offset" value="{{prevOffset}}">
+            <button class="btn btn-info" type="submit">Previous</button>
+        </form>
+        <div class="align-self-center">
+            <p class="align-self-center ml-4 mr-4">Page: {{pageNum}} / {{pageTotal}}</p>
+        </div>
+        
+        <form method="GET" action="/">
+            <input type="hidden" name="offset" value="{{nextOffset}}">
+            <button class="btn btn-info" type="submit">Next</button>
+        </form>
+    </div>
 </div>

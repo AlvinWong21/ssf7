@@ -1,3 +1,7 @@
 .container-width {
-    max-width: 600px
+    max-width: 650px
+}
+
+.btn {
+    width: 150px
 }

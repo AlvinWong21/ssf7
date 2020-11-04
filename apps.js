@@ -3,7 +3,7 @@ const express = require("express");
 
 //SQL statements
 SQL_TV_SHOW_COUNT = 'select count(*) as show_count from tv_shows';
-const SQL_TV_SHOW_LIST = 'select * from tv_shows limit ? offset ?';
+const SQL_TV_SHOW_LIST = 'select * from tv_shows order by name limit ? offset ?';
 const SQL_TV_SHOW_ID = 'select * from tv_shows where tvid = ?';
 
 //applications
@@ -16,7 +16,7 @@ module.exports = function(p) {
 
         const conn = await pool.getConnection()
         const offset = parseInt(req.query['offset']) || 0
-        const limit = 20
+        const limit = 10
         const listCount = await conn.query(SQL_TV_SHOW_COUNT)
         const pageTotal = listCount[0][0].show_count / limit
         try {
@@ -28,9 +28,9 @@ module.exports = function(p) {
                 tvList: tvList[0], 
                 pageTotal, 
                 pageNum: Math.max(1, (offset/limit) + 1),
-                // hasMore: tvList.length > limit,
                 prevOffset: Math.max(0, offset - limit),
-                nextOffset: offset + limit,
+                nextOffset: Math.min((offset + limit), (listCount[0][0].show_count - limit)),
+                noMore: !(listCount - offset) > limit,
                 hasMore: (listCount - offset) > limit
             })
         } catch(e) {
